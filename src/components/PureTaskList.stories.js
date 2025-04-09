@@ -1,16 +1,17 @@
-import TaskList from './TaskList.vue'
 
-import * as TaskStories from './Task.stories'
+import PureTaskList from './PureTaskList.vue';
+
+import * as TaskStories from './Task.stories';
 
 export default {
-  component: TaskList,
-  title: 'TaskList',
+ component: PureTaskList,
+ title: 'PureTaskList',
   tags: ['autodocs'],
   decorators: [() => ({ template: '<div style="margin: 3em;"><story/></div>' })],
   args: {
-    ...TaskStories.ActionsData
+    ...TaskStories.ActionsData,
   }
-}
+};
 
 export const Default = {
   args: {
@@ -22,62 +23,34 @@ export const Default = {
       { ...TaskStories.Default.args.task, id: '3', title: 'Task 3' },
       { ...TaskStories.Default.args.task, id: '4', title: 'Task 4' },
       { ...TaskStories.Default.args.task, id: '5', title: 'Task 5' },
-      { ...TaskStories.Default.args.task, id: '6', title: 'Task 6' }
-    ]
-  }
-}
+      { ...TaskStories.Default.args.task, id: '6', title: 'Task 6' },
+    ],
+  },
+};
 
 export const WithPinnedTasks = {
   args: {
     // Shaping the stories through args composition.
     // Inherited data coming from the Default story.
     tasks: [
-      {
-        id: '1',
-        title: 'Task 1',
-        state: 'TASK_INBOX'
-      },
-      {
-        id: '2',
-        title: 'Task 2',
-        state: 'TASK_INBOX'
-      },
-      {
-        id: '3',
-        title: 'Task 3',
-        state: 'TASK_PINNED'
-      },
-      {
-        id: '4',
-        title: 'Task 4',
-        state: 'TASK_INBOX'
-      },
-      {
-        id: '5',
-        title: 'Task 5',
-        state: 'TASK_INBOX'
-      },
-      {
-        id: '6',
-        title: 'Task 6 (pinned)',
-        state: 'TASK_PINNED'
-      }
-    ]
-  }
-}
+      ...Default.args.tasks.slice(0, 5),
+      { id: '6', title: 'Task 6 (pinned)', state: 'TASK_PINNED' },
+    ],
+  },
+};
 
 export const Loading = {
   args: {
     tasks: [],
-    loading: true
-  }
-}
+    loading: true,
+  },
+};
 
 export const Empty = {
   args: {
     // Shaping the stories through args composition.
     // Inherited data coming from the Loading story.
     ...Loading.args,
-    loading: false
-  }
-}
+    loading: false,
+  },
+};
